@@ -1,5 +1,17 @@
 //: [Previous](@previous)
 
+/*
+ The Doubly LinkedList code.
+ Add following functions to the LinkedList.
+ "getElementAtPosition" returns the element at a certain position.
+ The "insert" function will add an element to a particular
+ spot in the list.
+ "delete" will delete the first element with that
+ particular value.
+ "printLinkedList" function will print the linked list.
+ "printLinkedListReversed" function will print the linked list in reverse.
+ */
+
 import Foundation
 
 enum Order {
