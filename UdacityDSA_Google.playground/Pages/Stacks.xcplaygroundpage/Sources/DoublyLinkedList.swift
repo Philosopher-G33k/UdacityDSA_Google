@@ -1,49 +1,35 @@
-//: [Previous](@previous)
-
-/*
- The Doubly LinkedList code.
- Add following functions to the LinkedList.
- "getElementAtPosition" returns the element at a certain position.
- The "insert" function will add an element to a particular
- spot in the list.
- "delete" will delete the first element with that
- particular value.
- "printLinkedList" function will print the linked list.
- "printLinkedListReversed" function will print the linked list in reverse.
- */
-
 import Foundation
 
-enum Order {
+public enum Order {
     case straight
     case reversed
 }
 
-final class Element {
-    var value: Int
+final public class Element {
+    public var value: Int
     var next: Element?
     var previous: Element?
     
-    init(value: Int) {
+    public init(value: Int) {
         self.value = value
     }
 }
 
-final class LinkedList {
+final public class LinkedList {
     var head: Element?
     var tail: Element?
-    init (element: Element) {
+    public init (element: Element) {
         self.head = element
         self.tail = element
     }
     
-    func append(element: Element) {
+    public func append(element: Element) {
         element.previous = tail
         tail?.next = element
         tail = element
     }
     
-    func printLinkedList(order: Order) {
+    public func printLinkedList(order: Order) {
         switch order {
         case .straight:
             printLinkedList()
@@ -70,7 +56,7 @@ final class LinkedList {
         }
     }
     
-    func getElementAt(position: Int) -> Element? {
+    public func getElementAt(position: Int) -> Element? {
         var element: Element?
         element = head
         if position == 0 {
@@ -85,7 +71,7 @@ final class LinkedList {
         return element
     }
     
-    func insert(element: Element, position: Int) -> Bool {
+    public func insert(element: Element, position: Int) -> Bool {
         var result = false
         let currentElement = getElementAt(position: position)
         
@@ -99,20 +85,21 @@ final class LinkedList {
         currentElement.previous = element
         
         element.next = currentElement
+        
         if position == 0 {
             head = element
         }
-        
         result = true
         return result
     }
     
-    func deleteElement(position: Int) -> Bool {
+    public func deleteElement(position: Int) -> Bool {
         var result = false
         let currentElement = getElementAt(position: position)
         
         currentElement?.previous?.next = currentElement?.next
         currentElement?.next?.previous = currentElement?.previous
+        
         if position == 0 {
             head = currentElement?.next
         }
@@ -120,32 +107,6 @@ final class LinkedList {
         if currentElement?.next == nil {
             tail = currentElement?.previous
         }
-        
         return false
     }
 }
-
-var ll = LinkedList(element: Element(value: 10))
-ll.insert(element: Element(value: 20), position: 0)
-ll.deleteElement(position: 1)
-//ll.deleteElement(position: 0)
-ll.printLinkedList(order: .straight)
-
-
-ll.append(element: Element(value: 20))
-ll.append(element: Element(value: 30))
-ll.append(element: Element(value: 40))
-ll.append(element: Element(value: 50))
-ll.append(element: Element(value: 60))
-
-print(ll.getElementAt(position: 7)?.value)
-
-ll.printLinkedList(order: .straight)
-
-ll.insert(element: Element(value: 5), position: 1)
-
-ll.printLinkedList(order: .straight)
-
-ll.deleteElement(position: 1)
-
-ll.printLinkedList(order: .straight)
